@@ -43,15 +43,14 @@ void updateBufferObjects(SoftBodyGeometryGI & geomGI){
 }
 
 void drawGeom(SoftBodyGeometryGI const & geomGI, 
-			  Eigen::Matrix4f const & viewProjMat){
+              Eigen::Matrix4f const & viewProjMat){
 
-	// Get MVP shader id
-	GLuint mvpID = glGetUniformLocation(geomGI.m_shaderProgram, "MVP");
-	// Load VP mat into MVP
-    glUniformMatrix4fv(mvpID, 1, GL_FALSE, viewProjMat.data());
+    auto & shader = *(geomGI.m_shader);
+    // Use our shader
+    shader.bind();
 
-	// Use our shader
-	glUseProgram(geomGI.m_shaderProgram);
+    // Load VP mat into MVP
+    shader.setMat4f("MVP", &viewProjMat);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);
@@ -77,6 +76,8 @@ void drawGeom(SoftBodyGeometryGI const & geomGI,
     );
 
     glDisableVertexAttribArray(0);
+
+    shader.unBind();
 }
 
 } /* namespace spag */

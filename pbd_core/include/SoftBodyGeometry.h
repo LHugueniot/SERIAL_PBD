@@ -2,6 +2,7 @@
 #define SPAG_SOFT_BODY_GEOMETRY_H
 
 #include "Common.h"
+#include "Shader.h"
 
 namespace spag{
 
@@ -35,18 +36,18 @@ struct PhysicalAttributes{
 };
 
 struct SoftBodyGeometry{
-	SoftBodyGeometry();
+    SoftBodyGeometry();
 
     // Total number of conceptual vertices
     uint m_verticesNum;
 
-	float * m_vertexPositions;
+    float * m_vertexPositions;
     // Total size of m_vertexPositions (m_verticesNum * 3)
-	uint m_vertexPositionsSize;
+    uint m_vertexPositionsSize;
     // Buffer of velocities of vertices data
-	float * m_vertexVelocities;
+    float * m_vertexVelocities;
     // Total size of m_vertexVelocities (equal to m_vertexPositionsSize)
-	uint m_vertexVelocitiesSize;
+    uint m_vertexVelocitiesSize;
     /* 
         Buffer of positions of vertices data packed like so:
         [ x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4]  // Vertex buffer
@@ -69,15 +70,15 @@ struct SoftBodyGeometry{
     uint m_inverseMassSize;
 
     // Buffer containing distance constraint vertex indices
-	uint * m_distanceConstraints;
+    uint * m_distanceConstraints;
     // Total size of distance constraints buffer 
     // (m_distanceConstraintsNum * 2)
     uint m_distanceConstraintsSize;
     // Buffer containing distance constraint rest lengths 
     // (size is m_distanceConstraintsNum)
-	float * m_distanceConstraintRestLength;
+    float * m_distanceConstraintRestLength;
     // Number of conceptual distance constraints
-	uint m_distanceConstraintsNum;
+    uint m_distanceConstraintsNum;
     /* 
         Buffer containing "conceptual" vertex index
         [(0,1), (0,2), (2,1)]  // Conceptual vertex index
@@ -94,21 +95,21 @@ struct SoftBodyGeometry{
     */
 
     // Buffer containing distance constraint vertex indices
-	uint * m_bendingConstraints;
+    uint * m_bendingConstraints;
     // Total size of bending constraints buffer 
     // (m_bendingConstraintsNum * 3)
     uint m_bendingConstraintsSize;
     // Buffer containing bending constraint rest lengths 
     // (size is m_distanceConstraintsNum)
-	float * m_bendingConstraintRestLength;
+    float * m_bendingConstraintRestLength;
     // Number of conceptual bending constraints
-	uint m_bendingConstraintsNum;
+    uint m_bendingConstraintsNum;
 };
 
 
 struct SoftBodyGeometryGraphicalInterface : SoftBodyGeometry{
 
-	SoftBodyGeometryGraphicalInterface(){}
+    SoftBodyGeometryGraphicalInterface(){}
 
     ~SoftBodyGeometryGraphicalInterface(){}
     // Vertex Array Object
@@ -123,7 +124,8 @@ struct SoftBodyGeometryGraphicalInterface : SoftBodyGeometry{
     uint m_faceIndicesSize;
     uint * m_faceIndices;
 
-    GLuint m_shaderProgram;
+    
+    std::shared_ptr<Shader> m_shader;
 };
 
 using SoftBodyGeometryGI = SoftBodyGeometryGraphicalInterface;

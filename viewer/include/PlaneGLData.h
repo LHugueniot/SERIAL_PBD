@@ -7,12 +7,12 @@
 
 struct PlaneGLData{
 
-	PlaneGLData(){}
-	PlaneGLData(std::vector<float> * _vertices, GLuint * _monoColourShader, Vector3f _baseColour = {1.f, 1.f, 1.f}) :
-	monoColourShader(_monoColourShader),
-	baseColour(_baseColour){
-		vertices = _vertices;
-	}
+    PlaneGLData(){}
+    PlaneGLData(std::vector<float> * _vertices, GLuint * _monoColourShader, Vector3f _baseColour = {1.f, 1.f, 1.f}) :
+    monoColourShader(_monoColourShader),
+    baseColour(_baseColour){
+        vertices = _vertices;
+    }
 
     GLuint * monoColourShader;
 
@@ -26,7 +26,7 @@ struct PlaneGLData{
 };
 
 void generatePlaneVertexData(std::vector<float> & gridVertices, 
-	float squareSize, uint x_gridSize, uint z_gridSize);
+    float squareSize, uint x_gridSize, uint z_gridSize);
 void generateTile(std::vector<float> & gridVertices);
 void generateLine(std::vector<float> & gridVertices);
 

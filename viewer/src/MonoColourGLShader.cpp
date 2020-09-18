@@ -1,5 +1,5 @@
 #include "MonoColourGLShader.h"
 
 GLuint compileMonoColourShaderProgram(){
-	return compileShaderProgram(vertexMonoColourSource, fragmentMonoColourSource);
+    return compileShaderProgram(vertexMonoColourSource, fragmentMonoColourSource);
 }

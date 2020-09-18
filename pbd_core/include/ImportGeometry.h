@@ -14,9 +14,9 @@ aiScene const * importScene(std::string const & scenePath);
 std::vector<aiMesh*> getMeshesFromScene(aiScene * scene);
 
 bool getMeshData(aiMesh const & mesh,  // Assume mesh is exclusively triangulated
-				 std::vector<float> & vertexPositions, 
-				 std::vector<uint> & edgeIndices,
-				 std::vector<uint> & triFaceIndices);
+                 std::vector<float> & vertexPositions, 
+                 std::vector<uint> & edgeIndices,
+                 std::vector<uint> & triFaceIndices);
 
 } /* namespace spag */
 

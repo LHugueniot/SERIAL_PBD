@@ -24,6 +24,21 @@
 
 using uint = unsigned int;
 
+// Eigen declarations
+namespace Eigen{
+
+using Vector2ui = Matrix<uint, 2, 1>;
+using Vector3ui = Matrix<uint, 3, 1>;
+using Vector4ui = Matrix<uint, 4, 1>;
+using Matrix2x3f = Matrix<float, 2, 3>;
+using Matrix3x2f = Matrix<float, 3, 2>;
+using Matrix2x4f = Matrix<float, 2, 4>;
+using Matrix4x2f = Matrix<float, 4, 2>;
+using Matrix3x4f = Matrix<float, 3, 4>;
+using Matrix4x3f = Matrix<float, 4, 3>;
+
+}
+
 namespace spag{
 
 #define M_RAD_RATIO 0.01745329251
@@ -32,18 +47,18 @@ namespace spag{
 #define cot(x) cos(x)/sin(x)
 
 enum Dim : unsigned char{
-	X = 0,
-	Y = 1,
-	Z = 2
+    X = 0,
+    Y = 1,
+    Z = 2
 };
 
 inline Dim operator ++(Dim &id, int)
 {
-   Dim currId = id;
+    Dim currId = id;
 
-   id = static_cast<Dim>( id + 1 );
+    id = static_cast<Dim>( id + 1 );
 
-   return currId;
+    return currId;
 }
 
 
@@ -61,7 +76,7 @@ assert ((condition)); } while(false)
 #   define DEBUG_VAR(var) std::cout<<"BREAK POINT: LINE "<<__LINE__<<" IN "<<__FILE__<<" FOR VAR: "<<#var<<" = "<<var<<std::endl;
 #   define DEBUG_MSG(msg) std::cout<<"BREAK POINT: LINE "<<__LINE__<<" IN "<<__FILE__<<" ~ WITH MSG: "<<msg<<std::endl;
 #   define DEBUG_ASS(Expr, Msg) \
-    __M_Assert(#Expr, Expr, __FILE__, __LINE__, Msg)
+     __M_Assert(#Expr, Expr, __FILE__, __LINE__, Msg)
 #else
 #   define DEBUG(...) do {} while (0)
 #   define DEBUG_VAR(var) do {} while (0)
@@ -71,12 +86,12 @@ assert ((condition)); } while(false)
 
 template<typename T>
 void __M_Assert(const char* expr_str, bool expr, const char* file, int line, T msg){
-    if (!expr){
+     if (!expr){
         std::cerr << "Assert failed:\t" << msg << "\n"
             << "Expected:\t" << expr_str << "\n"
             << "Source:\t\t" << file << ", line " << line << "\n";
         abort();
-    }
+     }
 }
 
 } /* namespace spag */
