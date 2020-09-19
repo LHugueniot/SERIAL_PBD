@@ -16,12 +16,13 @@ class RigidBodyGeometry;
 
 struct Scene{
 
+    // Current scene camera
+    std::shared_ptr<Camera> m_currentCamera;
+
+    // Store pointers to cameras
 	std::vector<std::shared_ptr<Camera>> m_cameras;
 
-	// 
-	std::shared_ptr<Camera> m_currentCamera;
-
-    // 
+    // Store pointers to shared shaders (no need to compile twice!)
     std::vector<std::shared_ptr<Shader>> m_sharedShaders;
 
     // Store pointers to all Geometry base class
