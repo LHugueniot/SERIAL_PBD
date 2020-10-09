@@ -1,0 +1,1 @@
+subl.exe . **/src/* **/include/* -n

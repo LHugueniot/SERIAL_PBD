@@ -2,6 +2,7 @@
 #define SPAG_SHADER_H
 
 #include "Common.h"
+#include <fstream>
 
 namespace spag{
 
@@ -51,6 +52,10 @@ struct Shader{
     bool setMat4x3f(std::string const & name, Eigen::Matrix4x3f const * val, size_t count = 1, bool transpose = false);
     bool setMat4f(std::string const & name, Eigen::Matrix4f const * val, size_t count = 1, bool transpose = false);
 };
+
+Shader compileShader(std::string ){
+
+}
 
 } /* namespace spag */
 

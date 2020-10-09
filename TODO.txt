@@ -1,0 +1,20 @@
+TODO:
+
+Implement entity/component system
+
+Kernel.h
+	- Implement multi SDL windows in SDL_state
+	- Maybe switch to qt?
+	- Implement Event handler
+	- Add multithreaded event handling
+
+Geometry.h
+	- Remove raw pointers and replace with templated container
+
+SoftBodyGeometry
+	- Remove raw pointers and replace with templated container
+
+Drawable
+	- Remove raw pointers and replace with templated container
+
+Drawable.h

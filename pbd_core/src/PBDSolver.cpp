@@ -23,7 +23,6 @@ void advanceStep(SoftBodyGeometry & geom,         // soft body geom to solve on
             projPos[idx] = geom.m_vertexPositions[idx] +
                            geom.m_vertexVelocities[idx] *
                            dt;
-
         }
     }
 

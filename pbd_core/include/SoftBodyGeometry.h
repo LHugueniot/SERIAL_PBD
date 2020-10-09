@@ -3,64 +3,18 @@
 
 #include "Common.h"
 #include "Shader.h"
+#include "Drawable.h"
+#include "Geometry.h"
 
 namespace spag{
 
-static float GRAV_DEFAULT[3] = {0.f, 0.98f, 0.f};
-
-struct PhysicalAttributes{
-
-    PhysicalAttributes() = delete;
-
-    PhysicalAttributes(float _grav[3] = GRAV_DEFAULT,
-                       float _timeStep = .24f, 
-                       uint _iterations = 16,
-                       float _damp = 0.99f) :
-    m_ts(_timeStep),
-    m_iters(_iterations),
-    m_damp(_damp) {
-        for(int i=0; i<3; i++)
-            m_grav[i] = _grav[i];
-    }
-
-    // Gravity
-    float m_grav[3];
-
-    // Time step
-    float m_ts;
-
-    // Number of iterations
-    uint m_iters;
-
-    float m_damp;
-};
-
-struct SoftBodyGeometry{
+struct SoftBodyGeometry : Geometry{
     SoftBodyGeometry();
 
-    // Total number of conceptual vertices
-    uint m_verticesNum;
-
-    float * m_vertexPositions;
-    // Total size of m_vertexPositions (m_verticesNum * 3)
-    uint m_vertexPositionsSize;
     // Buffer of velocities of vertices data
     float * m_vertexVelocities;
     // Total size of m_vertexVelocities (equal to m_vertexPositionsSize)
     uint m_vertexVelocitiesSize;
-    /* 
-        Buffer of positions of vertices data packed like so:
-        [ x1,y1,z1, x2,y2,z2, x3,y3,z3, x4,y4,z4]  // Vertex buffer
-          \______/  \______/  \______/  \______/
-           vertex1   vertex2   vertex3   vertex4   // Conceptual vertices
-        To access vertex data per dimension:
-            0 <= Dim < 2
-            0 <= vertexi < m_verticesNum                
-            vert_dim = m_vertexPositions[vertexi * 3 + Dim]
-
-        e.g:
-            float vert2_y = m_vertexPositions[2 * 3 + Y]
-    */
 
     // Buffer of inverse mass of vertices data
     // Store only inverse of mass as mass is only
@@ -107,7 +61,9 @@ struct SoftBodyGeometry{
 };
 
 
-struct SoftBodyGeometryGraphicalInterface : SoftBodyGeometry{
+struct SoftBodyGeometryGraphicalInterface : 
+    public SoftBodyGeometry,
+    public Drawable{
 
     SoftBodyGeometryGraphicalInterface(){}
 
@@ -123,9 +79,6 @@ struct SoftBodyGeometryGraphicalInterface : SoftBodyGeometry{
 
     uint m_faceIndicesSize;
     uint * m_faceIndices;
-
-    
-    std::shared_ptr<Shader> m_shader;
 };
 
 using SoftBodyGeometryGI = SoftBodyGeometryGraphicalInterface;
@@ -140,3 +93,23 @@ void drawGeom(SoftBodyGeometryGI const & geomGI,
 } /* namespace spag */
 
 #endif /* SPAG_SOFT_BODY_GEOMETRY_H */
+
+/*
+template<template<typename...> Containter>
+struct SoftBody{
+    template<template<typename...> Containter2>
+    SoftBody(SoftBody<Container2> const & other){
+        m_data_1 = other.m_data_1;
+        m_data_2 = other.m_data_2;
+    }
+
+    Contrainer<float> m_data_1;
+    Contrainer<uint> m_data_1;
+};
+
+using HostSoftBody = SoftBody<std::vector>;
+using DevicdeSoftBody = SoftBody<thrust::device_vector>;
+
+void do(HostSoftBody sb);
+void do(DeviceSoftBody sb);
+*/

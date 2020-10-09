@@ -5,9 +5,16 @@
 
 namespace spag{
 
-    struct Drawable{
-        void Draw();
-    };
+struct Drawable{
+
+    virtual ~Drawable() = default;
+
+    // Force override
+    virtual void draw(Eigen::Matrix4f & cameraMat) = 0;
+
+    // Shader to be used
+    std::shared_ptr<Shader> m_shader;
+};
 
 } /* namespace spag */
 

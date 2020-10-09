@@ -12,6 +12,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <algorithm>
 #include <unordered_set>
 
 //OpenGL includes
@@ -23,6 +24,14 @@
 #include <Eigen/Geometry>
 
 using uint = unsigned int;
+
+namespace std{
+    template<class T>
+    const T& clamp( const T& v, const T& lo, const T& hi ){
+        assert(!(hi < lo));
+        return (v < lo) ? lo : (hi < v) ? hi : v;
+    }
+}
 
 // Eigen declarations
 namespace Eigen{
@@ -76,7 +85,7 @@ assert ((condition)); } while(false)
 #   define DEBUG_VAR(var) std::cout<<"BREAK POINT: LINE "<<__LINE__<<" IN "<<__FILE__<<" FOR VAR: "<<#var<<" = "<<var<<std::endl;
 #   define DEBUG_MSG(msg) std::cout<<"BREAK POINT: LINE "<<__LINE__<<" IN "<<__FILE__<<" ~ WITH MSG: "<<msg<<std::endl;
 #   define DEBUG_ASS(Expr, Msg) \
-     __M_Assert(#Expr, Expr, __FILE__, __LINE__, Msg)
+     _assert(#Expr, Expr, __FILE__, __LINE__, Msg)
 #else
 #   define DEBUG(...) do {} while (0)
 #   define DEBUG_VAR(var) do {} while (0)
@@ -85,7 +94,7 @@ assert ((condition)); } while(false)
 #endif
 
 template<typename T>
-void __M_Assert(const char* expr_str, bool expr, const char* file, int line, T msg){
+void _assert(const char* expr_str, bool expr, const char* file, int line, T msg){
      if (!expr){
         std::cerr << "Assert failed:\t" << msg << "\n"
             << "Expected:\t" << expr_str << "\n"

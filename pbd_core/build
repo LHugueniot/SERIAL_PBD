@@ -1,5 +1,5 @@
 echo COMPILING
-g++ -Iinclude -I/usr/include/eigen3 -c -Wall -Werror -fpic src/* --std=c++11
+g++ -Iinclude -I/usr/include/eigen3 -c -Wall -Werror -fpic src/* --std=c++14
 ls *.o
 mv *.o bin/obj/
 echo LINKING

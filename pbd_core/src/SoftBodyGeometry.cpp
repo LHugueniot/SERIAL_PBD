@@ -39,7 +39,6 @@ void updateBufferObjects(SoftBodyGeometryGI & geomGI){
                  &geomGI.m_faceIndices[0], GL_STATIC_DRAW);
 
     glDisableVertexAttribArray(0);
-
 }
 
 void drawGeom(SoftBodyGeometryGI const & geomGI, 

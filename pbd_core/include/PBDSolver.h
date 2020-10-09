@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "SoftBodyGeometry.h"
+#include "PhysicalAttributes.h"
 
 namespace spag{
 
